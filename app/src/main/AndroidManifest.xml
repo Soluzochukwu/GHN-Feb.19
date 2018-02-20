@@ -20,7 +20,14 @@
         </activity>
         <activity android:name=".loginactivicty" />
         <activity android:name=".ProfileActivicty" />
-        <activity android:name=".ForgotPasswordActivity"></activity>
+        <activity android:name=".ForgotPasswordActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".Account_Settings" />
+        <activity android:name=".Groups_Settings" />
+        <activity android:name=".Notification_Settings" />
+        <activity android:name=".DS_Settings" />
+        <activity android:name=".Help_Settings" />
+        <activity android:name=".EditProfile_Account"></activity>
     </application>
 
 </manifest>

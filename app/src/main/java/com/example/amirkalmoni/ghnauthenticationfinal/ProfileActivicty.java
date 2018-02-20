@@ -17,8 +17,7 @@ public class ProfileActivicty extends AppCompatActivity implements View.OnClickL
 
     private FirebaseAuth firebaseAuth;
     private TextView textViewUserEmail;
-    private Button buttonLogout;
-
+    private Button settingsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,21 +36,15 @@ public class ProfileActivicty extends AppCompatActivity implements View.OnClickL
 
         textViewUserEmail = findViewById(R.id.textViewUserEmail);
         textViewUserEmail.setText("Welcome:  " +user.getEmail());
-        buttonLogout = findViewById(R.id.buttonLogout);
-
-        buttonLogout.setOnClickListener(this);
+        settingsButton = findViewById(R.id.buttonSettings);
+        settingsButton.setOnClickListener(this);
 
     }
 
     @Override
     public void onClick(View view) {
 
-        if(view == buttonLogout)
-        {
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(this, loginactivicty.class));
-        }
+        if(view == settingsButton) startActivity(new Intent(this, SettingsActivity.class));
 
     }
 }
