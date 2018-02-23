@@ -12,60 +12,59 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+//import com.google.firebase.auth.FirebaseUser;
 
 
 public class Account_Settings extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
     private ListView listView;
-    private ArrayAdapter<String> adapter;
-    private int noOfOptions = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Account");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
+
+        //assigning firebase user
+        firebaseAuth = FirebaseAuth.getInstance();
+        //FirebaseUser user = firebaseAuth.getCurrentUser();
 
         //Initialise list view
         listView = findViewById(R.id.accountListView);
 
         //Create list
         String[] options = new String[]{"Edit Account Information", "Log Out", "Delete Account"};
-        ArrayList<String> listOfOptions = new ArrayList<String>();
+        ArrayList<String> listOfOptions = new ArrayList<>();
         listOfOptions.addAll(Arrays.asList(options));
 
         //Create and Set ArrayAdapter
-        adapter = new ArrayAdapter<String>(this, R.layout.simplerow, listOfOptions);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, listOfOptions);
         listView.setAdapter(adapter);
-        click();
-    }
 
-    private void click() {
+        //Set on click listener
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                int optionPosition = i;
-                for (int index = 0; index < noOfOptions; index++) {
-                    if (index == optionPosition) {
-                        String optionName = (String) listView.getItemAtPosition(index);
-                        nextActivity(optionName);
-                        break;
-                    }
-                }
+                String optionName = (String) listView.getItemAtPosition(i);
+                click(optionName);
             }
         });
+
     }
 
-    private void nextActivity(String selectedOption) {
-        Intent intent = null;
-        if (selectedOption.equalsIgnoreCase("Edit Account Information"))
-            intent = new Intent(this, EditProfile_Account.class);
-        if (selectedOption.equalsIgnoreCase("Log Out") || selectedOption.equalsIgnoreCase("Delete Account")) {
+    private void click(String selectedOption) {
+        if(selectedOption.equalsIgnoreCase("Edit Account Information")){
+            startActivity(new Intent(this, EditProfile_Account.class));
+        }
+        else if (selectedOption.equalsIgnoreCase("Log Out")){
             firebaseAuth.signOut();
             finish();
-            intent = new Intent(this, loginactivicty.class);
+            startActivity(new Intent(this, loginactivicty.class));
         }
-        startActivity(intent);
+        else if (selectedOption.equalsIgnoreCase("Delete Account")){
+            //Pop UP to confirm then delete
+        }
     }
+
 }

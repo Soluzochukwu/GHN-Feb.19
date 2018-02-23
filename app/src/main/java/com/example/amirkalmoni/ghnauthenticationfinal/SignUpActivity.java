@@ -28,6 +28,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Sign Up");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signupactivity);
 

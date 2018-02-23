@@ -32,6 +32,7 @@ public class loginactivicty extends AppCompatActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Login");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginactivicty);
 

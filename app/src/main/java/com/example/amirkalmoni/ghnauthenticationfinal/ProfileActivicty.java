@@ -21,6 +21,7 @@ public class ProfileActivicty extends AppCompatActivity implements View.OnClickL
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTitle("Groups");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_activicty);
 
