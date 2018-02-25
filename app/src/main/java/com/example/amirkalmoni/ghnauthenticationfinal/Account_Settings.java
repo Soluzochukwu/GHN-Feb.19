@@ -1,5 +1,6 @@
 package com.example.amirkalmoni.ghnauthenticationfinal;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,28 +11,40 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.google.firebase.auth.FirebaseAuth;
-//import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUser;
+
 
 
 public class Account_Settings extends AppCompatActivity {
 
     private FirebaseAuth firebaseAuth;
+    private FirebaseUser user;
     private ListView listView;
+    private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         setTitle("Account");
+        Bundle extra = getIntent().getExtras();
+        password = extra.getString("password");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
 
         //assigning firebase user
         firebaseAuth = FirebaseAuth.getInstance();
-        //FirebaseUser user = firebaseAuth.getCurrentUser();
+        user = firebaseAuth.getCurrentUser();
 
         //Initialise list view
         listView = findViewById(R.id.accountListView);
+        progressBar = new ProgressBar(this);
+        progressDialog = new ProgressDialog(this);
 
         //Create list
         String[] options = new String[]{"Edit Account Information", "Log Out", "Delete Account"};
@@ -63,7 +76,9 @@ public class Account_Settings extends AppCompatActivity {
             startActivity(new Intent(this, loginactivicty.class));
         }
         else if (selectedOption.equalsIgnoreCase("Delete Account")){
-            //Pop UP to confirm then delete
+
+            startActivity(new Intent(this, Delete_Account.class));
+
         }
     }
 

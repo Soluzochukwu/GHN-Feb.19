@@ -18,12 +18,21 @@ public class ProfileActivicty extends AppCompatActivity implements View.OnClickL
     private FirebaseAuth firebaseAuth;
     private TextView textViewUserEmail;
     private Button settingsButton;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setTitle("Groups");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_activicty);
+
+        setTitle("Groups");
+        Bundle extras = getIntent().getExtras();
+        if(extras == null){
+            password = null;
+        }else {
+            password = extras.getString("password");
+        }
 
         firebaseAuth = FirebaseAuth.getInstance();
         if (firebaseAuth.getCurrentUser() ==null)
@@ -45,7 +54,13 @@ public class ProfileActivicty extends AppCompatActivity implements View.OnClickL
     @Override
     public void onClick(View view) {
 
-        if(view == settingsButton) startActivity(new Intent(this, SettingsActivity.class));
+        if(view == settingsButton) {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            intent.putExtra("password", password);
+            startActivity(intent);
+
+            //startActivity(new Intent(this, SettingsActivity.class));
+        }
 
     }
 }

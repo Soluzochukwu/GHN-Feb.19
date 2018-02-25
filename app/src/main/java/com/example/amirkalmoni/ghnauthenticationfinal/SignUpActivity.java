@@ -80,6 +80,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 if(task.isSuccessful()){
                     //USER IS SUCCESSFULLY REGISTERED AND CAN LOGIN
                     Toast.makeText(SignUpActivity.this, "User is Registered Successfully ", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivicty.class);
+                    intent.putExtra("password", editTextPassword.getText().toString().trim());
+                    startActivity(intent);
                     progressDialog.dismiss();
 
                 }

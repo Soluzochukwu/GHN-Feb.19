@@ -45,8 +45,6 @@ public class loginactivicty extends AppCompatActivity implements View.OnClickLis
         }
 
 
-
-
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTexPassword);
         buttonSignIn = findViewById(R.id.buttonLogin);
@@ -63,7 +61,7 @@ public class loginactivicty extends AppCompatActivity implements View.OnClickLis
 
     private void userLogin(){
         String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
 
 
 
@@ -88,7 +86,10 @@ public class loginactivicty extends AppCompatActivity implements View.OnClickLis
                 progressDialog.dismiss();
                 if(task.isSuccessful()){
                     finish();
-                    startActivity(new Intent(getApplicationContext(), ProfileActivicty.class ));
+                    Intent intent = new Intent(getApplicationContext(), ProfileActivicty.class);
+                    intent.putExtra("password", password);
+                    startActivity(intent);
+                    //startActivity(new Intent(getApplicationContext(), ProfileActivicty.class ));
 
                 }
                 else{

@@ -18,10 +18,15 @@ public class SettingsActivity extends AppCompatActivity {
 
     private ListView listView;
     private FirebaseUser user;
+    private String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         setTitle("Settings");
+        Bundle extra = getIntent().getExtras();
+        password = extra.getString("password");
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
@@ -53,7 +58,11 @@ public class SettingsActivity extends AppCompatActivity {
     private void click(String optionSelected){
 
         if(optionSelected.equalsIgnoreCase("Account")){
-            startActivity(new Intent(this, Account_Settings.class));
+            Intent intent = new Intent(getApplicationContext(), Account_Settings.class);
+            intent.putExtra("password", password);
+            startActivity(intent);
+
+            //startActivity(new Intent(this, Account_Settings.class));
         }
         else if (optionSelected.equalsIgnoreCase("Groups")){
             startActivity(new Intent(this, Groups_Settings.class));
