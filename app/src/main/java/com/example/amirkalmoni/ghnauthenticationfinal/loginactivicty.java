@@ -6,11 +6,16 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import android.support.v7.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -35,6 +40,9 @@ public class loginactivicty extends AppCompatActivity implements View.OnClickLis
         setTitle("Login");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loginactivicty);
+
+//        Toolbar thisToolbar = (Toolbar) findViewById(R.id.loginToolbar);
+//        setSupportActionBar(thisToolbar);
 
         firebaseAuth = FirebaseAuth.getInstance();
         if(firebaseAuth.getCurrentUser() != null)
@@ -119,4 +127,6 @@ public class loginactivicty extends AppCompatActivity implements View.OnClickLis
         }
 
     }
+
+
 }
